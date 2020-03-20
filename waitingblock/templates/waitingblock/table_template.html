@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+{% load static %}
+{% load render_table from django_tables2 %}
+<html>
+
+<head>
+  <meta http-equiv="refresh" content="120">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=yes">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>   
+  <link rel="stylesheet" href="{% static 'css/waitingblock.css' %}">
+  <title>waitingblock</title>
+</head>
+
+<body>
+  <div class="container">
+    <p><form action="{% url 'home' %}">
+      <button type="submit" class="btn">Home</button>
+      </form></p>
+  </div>
+{% block data %}
+<div class="section">
+    <div id="form_card" class="card-panel col s12">
+        <form action="" method="POST">
+            {% csrf_token %}
+            {% render_table table %}
+            <input class="btn btn-primary red" type="submit" value="Delete"/>
+        </form>
+    </div>
+</div>
+{% endblock %}
+{% block scripts %}
+<script>
+    var checkboxes = $("input[type='checkbox']"),
+        submitButton = $("button[type='submit']");
+
+    checkboxes.click(function() {
+        submitButton.attr("disabled", !checkboxes.is(":checked"));
+    });
+</script>
+{% endblock %}
+
+</body>
+<!-- FOOTER -->
+<footer>
+  <div id="footer">
+    <div class="row justify-content-center">
+      <div class="col-8">
+        {% if user.is_authenticated %}
+        <form action="{% url 'logout' %}">
+          <button type="submit" class="btn">Logout</button>
+          </form>
+        {% else %}
+      </div>
+    </div>
+    {% endif %}
+
+  </div>
+</footer>
+</div>
+
+</html>

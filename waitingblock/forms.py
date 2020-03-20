@@ -3,8 +3,22 @@ from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit
 from django.db import models
 from django.forms import ModelForm
-from .models import Customer
+from .models import Customer, News
 
+class NewsForm(forms.ModelForm):
+    class Meta:
+        model = News
+        fields = (
+            'title',
+            'description',
+        )
+
+    def __init__(self, *args, **kwargs):
+        super(NewsForm, self).__init__(*args, **kwargs)
+        self.helper = FormHelper(self)
+#       self.helper.form_id = 'customerform-id'
+        self.helper.form_method = 'POST'
+        self.helper.add_input(Submit('submit', 'Add'))
 
 class CustomerForm(forms.ModelForm):
     class Meta:

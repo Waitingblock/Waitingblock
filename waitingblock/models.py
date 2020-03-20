@@ -16,6 +16,13 @@ from phonenumber_field.modelfields import PhoneNumberField
 #from django.forms import ModelForm
 
 
+class News(models.Model):
+    uid = models.UUIDField(default=uuid.uuid4, editable=False)
+    title = models.CharField(max_length=128, null=False, blank=False)
+    description = models.CharField(max_length=2048, null=False, blank=False)
+    created = models.DateTimeField(auto_now_add=True)
+
+
 class Restaurant(models.Model):
     Restaurant_name = models.ForeignKey('auth.User', on_delete=models.CASCADE)
     contact = PhoneNumberField(blank=True)

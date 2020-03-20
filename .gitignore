@@ -5,3 +5,5 @@ myenv
 db.sqlite3
 /static
 .DS_Store
+package-lock.json
+/node_modules

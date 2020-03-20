@@ -1,3 +1,17 @@
+<!DOCTYPE html>
+{% load static %}
+{% load render_table from django_tables2 %}
+<html>
+
+<head>
+  <meta http-equiv="refresh" content="120">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=yes">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>   
+  <link rel="stylesheet" href="{% static 'css/waitingblock.css' %}">
+  <title>waitingblock</title>
+</head>
 
 {% block title %}Sign Up{% endblock %}
 
@@ -15,3 +29,4 @@
   }
   </script>
 {% endblock %}
+</html>
