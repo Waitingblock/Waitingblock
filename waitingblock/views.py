@@ -25,7 +25,8 @@ from .forms import CustomerForm, CustomerUpdateForm, NewsForm
 
 def newslist(request):
     table = NewsTable(News.objects.all())
-    RequestConfig(request, paginate={"per_page": 10}).configure(table)
+    RequestConfig(request, paginate={"per_page": 5}).configure(table)
+    template_name = 'waitingblock/table_template.html'
 
     return render(request, 'waitingblock/table_template.html', {'table': table})
 

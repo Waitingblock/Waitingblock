@@ -9,13 +9,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=yes">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>   
-  <link rel="stylesheet" href="{% static 'css/waitingblock.css' %}">
   <title>waitingblock</title>
 </head>
 
 <body>
   <div class="container">
-  </div>
   <div class="row justify-content-center">
     <div class="col-8">
       <h1>waitingblock</h1>
@@ -28,6 +26,13 @@
         <p><form action="{% url 'newslist' %}">
           <button type="submit" class="btn">Tables</button>
           </form></p>
+              {% if user.is_authenticated %}
+              <form action="{% url 'logout' %}">
+                <button type="submit" class="btn">Logout</button>
+                </form>
+              {% else %}
+          {% endif %}
+      
         <p><form action="{% url 'admin:index' %}">
         <button type="submit" class="btn">{{ user.username }}</button>
         </form>
@@ -53,22 +58,11 @@
     </div>
   </div>
   </div>
-
+</div>
 </body>
 <!-- FOOTER -->
 <footer>
   <div id="footer">
-    <div class="row justify-content-center">
-      <div class="col-8">
-        <hr class="mt-0 mb-4">
-        {% if user.is_authenticated %}
-        <form action="{% url 'logout' %}">
-          <button type="submit" class="btn">Logout</button>
-          </form>
-        {% else %}
-      </div>
-    </div>
-    {% endif %}
 
   </div>
 </footer>

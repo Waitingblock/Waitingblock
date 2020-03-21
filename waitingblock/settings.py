@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'waitingblock',
     'django_tables2',
     'crispy_forms',
+    'materialize',
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
