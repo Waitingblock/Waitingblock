@@ -47,4 +47,4 @@ class NewsTable(tables.Table):
 
     class Meta:
         model = News
-        fields = ('check', 'title', 'created')
+        fields = ('check', 'title', 'created', 'modified', 'status', 'is_deleted')

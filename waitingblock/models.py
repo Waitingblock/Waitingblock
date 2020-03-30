@@ -16,11 +16,15 @@ from phonenumber_field.modelfields import PhoneNumberField
 #from django.forms import ModelForm
 
 
+BOOL_CHOICES = ((True, 'Waiting'), (False, 'Seated'))
+
 class News(models.Model):
     uid = models.UUIDField(default=uuid.uuid4, editable=False)
     title = models.CharField(max_length=128, null=False, blank=False)
     description = models.CharField(max_length=2048, null=False, blank=False)
     created = models.DateTimeField(auto_now_add=True)
+    modified_date = models.DateTimeField(auto_now=True)
+    status = models.BooleanField(default=False)
 
 
 class Restaurant(models.Model):
@@ -35,8 +39,6 @@ class Restaurant(models.Model):
 
 
 #    image = models.ImageField()
-
-BOOL_CHOICES = ((True, 'Waiting'), (False, 'Seated'))
 
 
 class Customer(models.Model):
@@ -62,3 +64,18 @@ class Customer(models.Model):
             verbose_name = 'Customer'
             verbose_name_plural = 'Customers'
             ordering = ['-arrival_time']
+            
+
+class SoftDeleteModel(News):
+  class meta:
+      abstract = True
+      
+  is_deleted = models.DateTimeField(null=False, default=False)
+
+  def delete(self):
+    self.is_deleted = True
+    self.save()
+
+  def restore(self):
+    self.is_deleted = False
+    self.save()

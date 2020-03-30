@@ -14,6 +14,7 @@
 
 <body>
   <div class="container">
+    <div id="form_card" class="card-panel col s12">
     <p></p>
     <div class="row justify-content-center">
       <div class="col s1">
@@ -21,6 +22,11 @@
           <button type="submit" class="btn">Home</button>
           </form>
       </div>
+      <div class="col s1 offset-s1">
+        <form action="{% url 'admin:index' %}">
+                <button type="submit" class="btn">{{ user.username }}</button>
+                </form>
+            </div>        
       <div class="col s1 offset-s1 ">
         {% if user.is_authenticated %}
         <form action="{% url 'logout' %}">
@@ -30,9 +36,9 @@
       </div>
       {% endif %}
     </div>
-
+</div>
 {% block data %}
-<div class="section">
+<!-- <div class="section">
     <div id="form_card" class="card-panel col s12">
         <form action="" method="POST">
             {% csrf_token %}
@@ -40,10 +46,19 @@
             <div><p><input class="btn btn-primary red" type="submit" value="Delete"/></p></div>
         </form>
     </div>
-</div>
+</div> -->
 
+<div class="section">
+  <div id="form_card" class="card-panel col s12">
+      <form action="delete">
+          {% csrf_token %}
+          {% render_table table %}
+          <p><button class="btn btn-primary red" type="submit" >Delete</button></p>
+      </form>
+  </div>
 </div>
 {% endblock %}
+</div>
 {% block scripts %}
 <script>
     var checkboxes = $("input[type='checkbox']"),
@@ -54,8 +69,8 @@
     });
 </script>
 {% endblock %}
-
 </body>
+
 <!-- FOOTER -->
 <footer>
   <div id="footer">

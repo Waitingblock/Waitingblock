@@ -14,30 +14,40 @@
 
 <body>
   <div class="container">
-  <div class="row justify-content-center">
-    <div class="col-8">
-      <h1>waitingblock</h1>
-      <hr class="mt-0 mb-4">
-      {% load crispy_forms_tags %}
-      <!-- Username Login/Logout -->
-      <div>
+    <p></p>
+    <div id="form_card" class="card-panel col s12">
+<!-- Username Login/Logout -->
+    <div class="row justify-content-center">
+      <div class="col s1">
         {% block content %}
         {% if user.is_authenticated %}
-        <p><form action="{% url 'newslist' %}">
+          <form action="{% url 'newslist' %}">
           <button type="submit" class="btn">Tables</button>
           </form></p>
-              {% if user.is_authenticated %}
-              <form action="{% url 'logout' %}">
-                <button type="submit" class="btn">Logout</button>
+      </div>
+      <div class="col s1 offset-s1">
+        <form action="{% url 'admin:index' %}">
+                <button type="submit" class="btn">{{ user.username }}</button>
                 </form>
-              {% else %}
-          {% endif %}
-      
-        <p><form action="{% url 'admin:index' %}">
-        <button type="submit" class="btn">{{ user.username }}</button>
-        </form>
-        </p>
-        <!-- Form -->
+            </div>        
+      <div class="col s1 offset-s1 ">
+        {% if user.is_authenticated %}
+        <form action="{% url 'logout' %}">
+          <button type="submit" class="btn">Logout</button>
+          </form>
+        {% else %}
+      </div>
+      {% endif %}
+    </div>
+  </div>
+    <p></p>
+      {% load crispy_forms_tags %}
+
+<!-- Form -->
+
+<div class="section">
+<div id="form_card" class="card-panel col s12">
+      <div>
         <form method="post" novalidate>
           {% csrf_token %}
           <div class="row">
@@ -46,13 +56,17 @@
             </div>
         </form>
       </div>
+</div>
+</div>
       {% else %}
       <p>
-        <h7>Welcome Page</h7>
         <p>
-          <p><a href="{% url 'login' %}">Login</a></p>
-          <p><a href="{% url 'signup' %}">Sign Up</a></p>
-
+          <p><form action="{% url 'login' %}">
+            <button type="submit" class="btn">Login</button>
+            </form></p>
+          <p><form action="{% url 'signup' %}">
+            <button type="submit" class="btn">Sign Up</button>
+            </form></p>
           {% endif %}
           {% endblock %}
     </div>
