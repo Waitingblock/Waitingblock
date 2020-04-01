@@ -50,7 +50,7 @@
 
 <div class="section">
   <div id="form_card" class="card-panel col s12">
-      <form action="delete">
+      <form action="{% url 'delete' %}">
           {% csrf_token %}
           {% render_table table %}
           <p><button class="btn btn-primary red" type="submit" >Delete</button></p>

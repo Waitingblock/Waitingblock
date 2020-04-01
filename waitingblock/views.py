@@ -30,19 +30,18 @@ def newslist(request):
 
     return render(request, 'waitingblock/table_template.html', {'table': table})
 
-def delete(request):
-    table = NewsTable(News.objects.filter(is_deleted=False).first())
-    RequestConfig(request, paginate={"per_page": 5}).configure(table)
-    template_name = 'waitingblock/table_template.html'
+# def delete(request):
+#     table = NewsTable(News.objects.filter(is_deleted=False).first())
+#     RequestConfig(request, paginate={"per_page": 5}).configure(table)
+#     template_name = 'waitingblock/table_template.html'
 
-    return redirect('newslist')
+#     return redirect('newslist')
 
-
-#class Delete(generic.DeleteView):
-#    template_name = 'waitingblock/table_template.html'
-#    model = News
-#    success_url = 'newslist/'
-    
+def delete(request, uid):
+    group = News.objects.get(uid=News.uid)
+    group.status = Status.true
+    group.save()
+    return redirect(request, '')
 
 class WaitingblockView(FormView, TemplateView):
     model = News

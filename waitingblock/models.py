@@ -64,18 +64,19 @@ class Customer(models.Model):
             verbose_name = 'Customer'
             verbose_name_plural = 'Customers'
             ordering = ['-arrival_time']
-            
 
-class SoftDeleteModel(News):
-  class meta:
-      abstract = True
+
+# class SoftDeleteModel(News):
+#   class meta:
+#       abstract = True
       
-  is_deleted = models.DateTimeField(null=False, default=False)
+#   is_deleted = models.DateTimeField(null=False, default=False)
 
-  def delete(self):
-    self.is_deleted = True
-    self.save()
+#   def delete(self):
+#     self.is_deleted = True
+#     self.save()
 
-  def restore(self):
-    self.is_deleted = False
-    self.save()
+#   def restore(self):
+#     self.is_deleted = False
+#     self.save()
+
