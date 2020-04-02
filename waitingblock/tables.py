@@ -5,31 +5,6 @@ from django_tables2.utils import A
 from django.utils.safestring import mark_safe
 from .models import Customer, News
 
-
-# class CustomerTable(tables.Table):
-#     name = tables.Column()
-#     wait = tables.Column(order_by=('arrival_time'))
-#     partysize = tables.Column()
-#     arrival_time = tables.Column()
-#     status = tables.Column()
-#     contact = tables.Column()
-#     seat = tables.LinkColumn('status_update', accessor='pk', text='✔️')
-
-#     class Meta:
-#         data = Customer.objects.all()
-
-
-# class CustomerUpdateTable(tables.Table):
-#     name = tables.Column()
-#     wait = tables.Column(order_by=('arrival_time'))
-#     partysize = tables.Column()
-#     arrival_time = tables.Column()
-#     status = tables.Column()
-#     contact = tables.Column()
-
-#     class Meta:
-#         data = Customer.objects.all()
-
 class MaterializeCssCheckboxColumn(tables.CheckBoxColumn):
     def render(self, value, bound_column, record):
         default = {"type": "checkbox", "name": bound_column.name, "value": value}
@@ -41,10 +16,35 @@ class MaterializeCssCheckboxColumn(tables.CheckBoxColumn):
         attrs = tables.utils.AttributeDict(default, **(specific or general or {}))
         return mark_safe("<p><label><input %s/><span></span></label></p>" % attrs.as_html())
 
-class NewsTable(tables.Table):
-    created = tables.DateTimeColumn(format='m/d H\h\s')
-    check = MaterializeCssCheckboxColumn(accessor='uid')
+# class NewsTable(tables.Table):
+#     created = tables.DateTimeColumn(format='m/d H\h\s')
+#     check = MaterializeCssCheckboxColumn(accessor='uid')
+
+#     class Meta:
+#         model = News
+#         fields = ('check', 'title', 'created', 'modified', 'status', 'is_deleted')
+
+
+class CustomerTable(tables.Table):
+    name = tables.Column()
+    wait = tables.Column(order_by=('arrival_time'))
+    partysize = tables.Column()
+    arrival_time = tables.Column()
+    status = tables.Column()
+    contact = tables.Column()
+    seat = MaterializeCssCheckboxColumn(accessor='pk')
 
     class Meta:
-        model = News
-        fields = ('check', 'title', 'created', 'modified', 'status', 'is_deleted')
+        data = Customer.objects.all()
+
+
+class CustomerUpdateTable(tables.Table):
+    name = tables.Column()
+    wait = tables.Column(order_by=('arrival_time'))
+    partysize = tables.Column()
+    arrival_time = tables.Column()
+    status = tables.Column()
+    contact = tables.Column()
+
+    class Meta:
+        data = Customer.objects.all()

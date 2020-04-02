@@ -47,7 +47,7 @@ class Customer(models.Model):
     partysize = models.IntegerField()
     arrival_time = models.DateTimeField(auto_now_add=True, blank=True)
     contact = PhoneNumberField(blank=True)
-    status = models.BooleanField(choices=BOOL_CHOICES)
+    status = models.BooleanField(choices=BOOL_CHOICES, default=True)
 
     def get_time_diff(self):
         if self.arrival_time:

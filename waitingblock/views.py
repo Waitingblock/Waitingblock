@@ -11,7 +11,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.views import generic
 
 from .models import Customer, News
-from .tables import NewsTable #, CustomerTable, CustomerUpdateTable
+from .tables import CustomerTable, CustomerUpdateTable #, NewsTable
 from .forms import CustomerForm, CustomerUpdateForm, NewsForm
 
 #from .filters import CustomerListFilter
@@ -45,32 +45,18 @@ def delete(request, News):
 
 
 class WaitingblockView(FormView, TemplateView):
-    model = News
+    model = Customer
     template_name = 'waitingblock/base.html'
-    context_object_name = 'news'
-    form_class = NewsForm
+    context_object_name = 'customer'
+    form_class = CustomerForm
 
     def form_valid(self, form):
         form.save()
-        return redirect('newslist')
+        return redirect('home')
 
     def redirect_view(request):
         response = redirect('home')
         return response
-
-# class WaitingblockView(FormView, TemplateView):
-#     model = Customer
-#     template_name = 'waitingblock/base.html'
-#     context_object_name = 'customer'
-#     form_class = CustomerForm
-
-#     def form_valid(self, form):
-#         form.save()
-#         return redirect('home')
-
-#     def redirect_view(request):
-#         response = redirect('home')
-#         return response
 
 
 class CustomerUpdateView(MultiTableMixin, UpdateView):

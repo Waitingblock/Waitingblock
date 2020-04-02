@@ -27,7 +27,7 @@ class CustomerForm(forms.ModelForm):
             'name',
             'partysize',
             'contact',
-            'status',
+#            'status',
         )
 
     def __init__(self, *args, **kwargs):
