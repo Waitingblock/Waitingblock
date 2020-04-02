@@ -50,9 +50,9 @@
 
 <div class="section">
   <div id="form_card" class="card-panel col s12">
+    {% csrf_token %}
+    {% render_table table %}
       <form action="{% url 'delete' %}">
-          {% csrf_token %}
-          {% render_table table %}
           <p><button class="btn btn-primary red" type="submit" >Delete</button></p>
       </form>
   </div>

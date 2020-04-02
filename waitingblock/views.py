@@ -37,11 +37,12 @@ def newslist(request):
 
 #     return redirect('newslist')
 
-def delete(request, uid):
-    group = News.objects.get(uid=News.uid)
-    group.status = Status.true
+def delete(request, News):
+    group = form.save(commit=False)
+    group.status = True
     group.save()
-    return redirect(request, '')
+    return redirect(request, 'newslist')
+
 
 class WaitingblockView(FormView, TemplateView):
     model = News
